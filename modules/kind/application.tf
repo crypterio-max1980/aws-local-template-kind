@@ -18,21 +18,5 @@ resource "helm_release" "argo_events" {
   ]
 }
 
-### - OneUptime - ### 
-resource "helm_release" "oneuptime" {
-  name             = "oneuptime"
-  repository       = "https://helm-chart.oneuptime.com"
-  chart            = "oneuptime"
-  namespace        = "oneuptime"
-  create_namespace = true
 
-  atomic          = true
-  cleanup_on_fail = true
-  wait            = true
-  timeout         = 1200
-
-  depends_on = [
-    helm_release.ingress_nginx
-  ]
-}
 
