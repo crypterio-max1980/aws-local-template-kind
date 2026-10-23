@@ -51,6 +51,3 @@ variable "ssh_allowed_cidr" {
     error_message = "Provide a valid IPv4 address with a /32 mask."
   }
 }
-
-
-
