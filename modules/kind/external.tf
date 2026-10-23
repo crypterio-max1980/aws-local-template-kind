@@ -28,13 +28,13 @@ server:
   ingress:
     enabled: true
     ingressClassName: nginx
-    hostname: argo-dev.appflex.io
+    hostname: argo-dev.crypterio.co
 
     tls: true
 
 configs:
   cm:
-    url: https://argo-dev.appflex.io
+    url: https://argo-dev.crypterio.co
 
   secret:
     argocdServerAdminPassword: "$2a$10$lgcvwdvggWeLl1AN14NWsePcWQczWHRQH2eiUNL9w/gN6NaelDl.G"
