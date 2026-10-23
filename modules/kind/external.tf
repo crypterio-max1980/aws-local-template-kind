@@ -62,5 +62,31 @@ resource "null_resource" "wait_for_argocd" {
 }
 
 
+resource "kubernetes_namespace_v1" "oneuptime" {
+  metadata {
+    name = "oneuptime"
+
+    labels = {
+      app         = "oneuptime"
+      environment = var.environment
+    }
+  }
+  depends_on = [helm_release.argocd]
+}
+
+resource "helm_release" "oneuptime" {
+  name       = "oneuptime"
+  repository = "https://helm-chart.oneuptime.com"
+  chart      = "oneuptime"
+  namespace  = kubernetes_namespace_v1.oneuptime.metadata[0].name
+
+  wait    = true
+  timeout = 1200
+
+  depends_on = [
+    kubernetes_namespace_v1.oneuptime
+  ]
+}
+
 
 
