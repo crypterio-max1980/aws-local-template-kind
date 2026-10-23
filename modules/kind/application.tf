@@ -31,7 +31,11 @@ resource "helm_release" "oneuptime" {
   wait            = true
   timeout         = 1200
 
-  depends_on = [
-    helm_release.argo_events
+  values = [
+    yamlencode({
+      azure = {
+        image = ""
+      }
+    })
   ]
 }
