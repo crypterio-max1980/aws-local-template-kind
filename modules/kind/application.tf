@@ -30,5 +30,9 @@ resource "helm_release" "oneuptime" {
   cleanup_on_fail = true
   wait            = true
   timeout         = 1200
+
+  depends_on = [
+    helm_release.ingress_nginx
+  ]
 }
 
