@@ -30,12 +30,5 @@ resource "helm_release" "oneuptime" {
   cleanup_on_fail = true
   wait            = true
   timeout         = 1200
-
-  values = [
-    yamlencode({
-      azure = {
-        image = ""
-      }
-    })
-  ]
 }
+
