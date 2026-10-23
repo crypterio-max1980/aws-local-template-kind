@@ -23,7 +23,7 @@ resource "kubernetes_namespace_v1" "oneuptime" {
       app         = "oneuptime"
     }
   }
-  depends_on = [helm_release.argo-events]
+  depends_on = [helm_release.argo_events]
 }
 
 resource "helm_release" "oneuptime" {
