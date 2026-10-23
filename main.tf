@@ -23,7 +23,6 @@ resource "aws_vpc" "kind_vpc" {
 
   tags = {
     Name        = "terraform-provisioner-vpc"
-    Environment = var.environment
   }
 }
 
@@ -127,7 +126,6 @@ resource "aws_security_group" "tf_sec_gr" {
 
   tags = {
     Name        = "tf-provisioner-sg"
-    Environment = var.environment
   }
 }
 
@@ -157,7 +155,6 @@ resource "aws_instance" "instance" {
 
   tags = {
     Name        = "terraform-provisioner"
-    Environment = var.environment
   }
 
   # Save public IP locally
