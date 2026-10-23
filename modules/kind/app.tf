@@ -14,7 +14,6 @@ resource "helm_release" "argo_events" {
   depends_on = [helm_release.ingress_nginx]
 }
 
-
 resource "kubernetes_namespace_v1" "oneuptime" {
   metadata {
     name = "oneuptime"
