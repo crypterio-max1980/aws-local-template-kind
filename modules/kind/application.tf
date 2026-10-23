@@ -1,5 +1,5 @@
 
-### Argo Events
+### - Argo Events - ### 
 resource "helm_release" "argo_events" {
   name             = "argo-events"
   repository       = "https://argoproj.github.io/argo-helm"
@@ -18,29 +18,13 @@ resource "helm_release" "argo_events" {
   ]
 }
 
-### OneUptime namespace
-resource "kubernetes_namespace_v1" "oneuptime" {
-  metadata {
-    name = "oneuptime"
-
-    labels = {
-      app = "oneuptime"
-    }
-  }
-
-  depends_on = [
-    helm_release.argo_events
-  ]
-}
-
-### OneUptime
+### - OneUptime - ### 
 resource "helm_release" "oneuptime" {
-  name       = "oneuptime"
-  repository = "https://helm-chart.oneuptime.com"
-  chart      = "oneuptime"
-  namespace  = kubernetes_namespace_v1.oneuptime.metadata[0].name
-
-  create_namespace = false
+  name             = "oneuptime"
+  repository       = "https://helm-chart.oneuptime.com"
+  chart            = "oneuptime"
+  namespace        = "oneuptime"
+  create_namespace = true
 
   atomic          = true
   cleanup_on_fail = true
@@ -48,6 +32,6 @@ resource "helm_release" "oneuptime" {
   timeout         = 1200
 
   depends_on = [
-    kubernetes_namespace_v1.oneuptime
+    helm_release.argo_events
   ]
 }
