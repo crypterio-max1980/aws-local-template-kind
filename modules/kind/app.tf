@@ -68,7 +68,6 @@ resource "kubernetes_namespace_v1" "oneuptime" {
 
     labels = {
       app         = "oneuptime"
-      environment = var.environment
     }
   }
   depends_on = [helm_release.argocd]
