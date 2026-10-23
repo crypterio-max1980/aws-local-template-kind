@@ -1,4 +1,5 @@
-<img width="1048" height="581" alt="image" src="https://github.com/user-attachments/assets/fe4aef9b-afcf-493e-bb16-fe036e70d330" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/fef0fbeb-2e9f-4261-b8e6-525cf6613041" />
+
 
 ## AWS | Local-Template
 A reference blueprint for end-to-end automation of infrastructure and AI application deployment using GitLab, Terraform, AWS, Kubernetes (kind), and an LLM-based RAG stack.
