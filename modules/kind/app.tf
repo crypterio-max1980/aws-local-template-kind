@@ -1,64 +1,17 @@
 
-###---ArgoCD
-resource "helm_release" "argocd" {
-  name             = "argocd"
-  repository       = "https://argoproj.github.io/argo-helm"
-  chart            = "argo-cd"
-  namespace        = "argocd"
-  version          = "8.5.3" # Check for latest version if needed
+###---ArgoEvent
+resource "helm_release" "argo_events" {
+  name       = "argo-events"
+  repository = "https://argoproj.github.io/argo-helm"
+  chart      = "argo-events"
+  namespace  = "argo-events"
+  version    = "2.4.9"  # Replace with the latest if needed
   create_namespace = true
 
+  atomic          = true
   cleanup_on_fail = true
-  dependency_update = true
-
-  values = [
-    <<EOT
-
-crds:
-  install: true
-  keep: true
-
-server:
-  service:
-    type: ClusterIP
-
-  extraArgs:
-    - --insecure
-
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    hostname: argo-dev.crypterio.co
-
-    tls: true
-
-configs:
-  cm:
-    url: https://argo-dev.crypterio.co
-
-  secret:
-    argocdServerAdminPassword: "$2a$10$lgcvwdvggWeLl1AN14NWsePcWQczWHRQH2eiUNL9w/gN6NaelDl.G"
-
-   EOT
-  ]
+  timeout         = 900
   depends_on = [helm_release.ingress_nginx]
-}
-
-resource "null_resource" "wait_for_argocd" {
-  triggers = {
-    key = uuid()
-  }
-
-  provisioner "local-exec" {
-    command = <<EOF
-      printf "\nWaiting for the argocd controller will be installed...\n"
-      kubectl wait --namespace ${helm_release.argocd.namespace} \
-        --for=condition=ready pod \
-        --selector=app.kubernetes.io/component=server \
-        --timeout=60s
-    EOF
-  }
-  depends_on = [helm_release.argocd]
 }
 
 
@@ -70,7 +23,7 @@ resource "kubernetes_namespace_v1" "oneuptime" {
       app         = "oneuptime"
     }
   }
-  depends_on = [helm_release.argocd]
+  depends_on = [helm_release.argo-events]
 }
 
 resource "helm_release" "oneuptime" {
