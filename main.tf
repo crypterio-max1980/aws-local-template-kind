@@ -201,9 +201,9 @@ resource "aws_instance" "instance" {
       "rm -f terraform.zip terraform",
       "terraform version",
 
-      # kubectl stable release
+      # Install kubectl
       "KUBECTL_VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt)",
-      "curl -fsSLo kubectl https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl",
+      "curl -fsSLo kubectl https://dl.k8s.io/release/$${KUBECTL_VERSION}/bin/linux/amd64/kubectl",
       "sudo install -m 0755 kubectl /usr/local/bin/kubectl",
       "rm -f kubectl",
       "kubectl version --client",
