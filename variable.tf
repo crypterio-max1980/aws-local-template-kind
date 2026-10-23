@@ -42,7 +42,6 @@ variable "ec2_type" {
 variable "ssh_allowed_cidr" {
   description = "Your public IPv4 address in CIDR notation"
   type        = string
-  default     = "0.0.0.0/0"
 
   validation {
     condition = (
