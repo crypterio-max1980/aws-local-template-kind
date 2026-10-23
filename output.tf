@@ -1,4 +1,5 @@
 
+
 output "vpc_id" {
   value = aws_vpc.kind_vpc.id
 }
