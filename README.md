@@ -1,4 +1,4 @@
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/fef0fbeb-2e9f-4261-b8e6-525cf6613041" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/938478c6-1dfd-4687-b4b5-4d2d33205d91" />
 
 
 ## AWS | Local-Template
