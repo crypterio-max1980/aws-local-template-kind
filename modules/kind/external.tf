@@ -61,65 +61,6 @@ resource "null_resource" "wait_for_argocd" {
   depends_on = [helm_release.argocd]
 }
 
-###---Minio
-resource "helm_release" "minio" {
-  name             = "minio"
-  namespace        = "default"
-  repository       = "https://charts.min.io/"
-  chart            = "minio"
-  #version          = "5.1.6"  # check latest stable version
-  create_namespace = true
-
-  depends_on = [helm_release.argocd]
-  values = [
-    yamlencode({
-      mode         = "standalone"
-      replicas     = 1
-
-      # Root credentials (use variable for security)
-      rootUser     = "root"
-      rootPassword = var.minio_root_password
-
-      # Buckets to create automatically
-      buckets = [
-        { name = "velero" },
-        { name = "airbyte" },
-        { name = "anythingllm" },
-        { name = "loki" }
-      ]
-
-      # Enable persistent storage
-      persistence = {
-        enabled = true
-        size    = "10Gi"
-      }
-
-      # Service configuration
-      service = {
-        type = "ClusterIP"  # use NodePort or LoadBalancer if needed
-        port = 9000         # default S3 API port
-      }
-
-      # Console UI service
-      console = {
-        enabled = true
-        port    = 9001
-      }
-
-      # Resource requests & limits
-      resources = {
-        requests = {
-          memory = "512Mi"
-          cpu    = "250m"
-        }
-        limits = {
-          memory = "1Gi"
-          cpu    = "1000m"
-        }
-      }
-    })
-  ]
-}
 
 
 
