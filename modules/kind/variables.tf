@@ -1,3 +1,4 @@
+
 variable "kind_cluster_name" {
   description = "The name of the Kind cluster"
   type        = string
@@ -42,9 +43,3 @@ variable "ingress_nginx_namespace" {
   default     = "ingress-nginx"
 }
 
-variable "minio_root_password" {
-  description = "Root password for MinIO"
-  type        = string
-  default     = "q1w2e3r4100@"
-  sensitive   = true
-}
